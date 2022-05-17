@@ -38,4 +38,22 @@ public class CustomerTest {
                 "You earned 1 frequent renter points", testCustomer.statement());
     }
 
+    @Test
+    public void testHtmlStatementNone(){
+        assertEquals("<H1>Rentals for <EM>Christian</EM></H1><P>\n" +
+                "<P>You owe <EM>0.0</EM><P>\n" +
+                "On this rental you earned <EM>0</EM> frequent renter points<P>", testCustomer.htmlStatement());
+    }
+
+    @Test
+    public void testHtmlStatementItem() {
+        testCustomer.addRental(new Rental(new Movie("Interstellar", Movie.REGULAR), 3));
+
+        assertEquals("<H1>Rentals for <EM>Christian</EM></H1><P>\n" +
+                "Interstellar: 3.5<BR>\n" +
+                "<P>You owe <EM>3.5</EM><P>\n" +
+                "On this rental you earned <EM>1</EM> frequent renter points<P>", testCustomer.htmlStatement());
+    }
+
+
 }
