@@ -25,18 +25,15 @@ class Customer {
         returnString += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
 
         while (rentalEnumeration.hasMoreElements()) {
-            double rentalAmount = 0;
             Rental aRental = (Rental) rentalEnumeration.nextElement();
-            //determine amounts for each line
-            rentalAmount = aRental.getCharge();
             // add frequent renter points
             frequentRenterPoints ++;
             // add bonus for a two day new release rental
             if ((aRental.getMovie().getPriceCode() == Movie.NEW_RELEASE) && aRental.getDaysRented() > 1)
                 frequentRenterPoints ++;
             //show figures for this rental
-            returnString += "\t" + aRental.getMovie().getTitle()+ "\t" + "\t" + aRental.getDaysRented() + "\t" + String.valueOf(rentalAmount) + "\n";
-            totalAmount += rentalAmount;
+            returnString += "\t" + aRental.getMovie().getTitle()+ "\t" + "\t" + aRental.getDaysRented() + "\t" + String.valueOf(aRental.getCharge()) + "\n";
+            totalAmount += aRental.getCharge();
         }
         //add footer lines
         returnString += "Amount owed is " + String.valueOf(totalAmount) + "\n";
